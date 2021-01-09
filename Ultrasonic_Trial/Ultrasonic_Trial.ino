@@ -1,6 +1,6 @@
 // initializing pins of ultrasonic sensor
-#define trigger 10
-#define echo 9
+#define trigger 13
+#define echo 12
 
 // initializing constant with value equal to speed of sound
 #define SPEED_OF_SOUND 340
@@ -32,9 +32,16 @@ void loop() {
 
   float timeTaken = pulseIn(echo,HIGH)/2;
 
-  float distance = (SPEED_OF_SOUND * timeTaken) / 1000;
+  float distance = (SPEED_OF_SOUND * timeTaken) / 1000000;  // This distance in in meter
 
-  Serial.print("Distance = ");
-  Serial.println(distance);
+  float distanceInCentimeter = distance * 100;
+  float distanceInMillimeter = distance * 1000;
+
+  Serial.print("Distance: ");
+  Serial.print(distanceInCentimeter);
+  Serial.print(" cm \t");
+  Serial.print(distanceInMillimeter);
+  Serial.println(" mm");
+  delay(250);
 
 }
